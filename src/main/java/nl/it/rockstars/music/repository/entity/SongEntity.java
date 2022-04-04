@@ -6,11 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "song", schema = "rockstars")
@@ -36,4 +41,9 @@ public class SongEntity {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private ArtistEntity artist;
+
+    @OneToMany(mappedBy = "song", cascade = CascadeType.PERSIST)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private List<PlaylistSongEntity> playlistSongs = new ArrayList<>();
 }
