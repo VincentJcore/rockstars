@@ -6,11 +6,15 @@ import nl.it.rockstars.music.repository.PlaylistRepository;
 import nl.it.rockstars.music.repository.SongRepository;
 import nl.it.rockstars.music.repository.entity.PlaylistEntity;
 import nl.it.rockstars.music.repository.entity.PlaylistSongEntity;
+import nl.it.rockstars.music.repository.entity.SongEntity;
+import nl.it.rockstars.music.service.model.Mood;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 @Slf4j
 @Service
@@ -40,5 +44,24 @@ public class PlaylistService {
         }
 
         return playlistRepository.save(savedPlaylist).getId();
+    }
+
+    @Transactional
+    public Optional<Mood> extractMood(Long id) {
+
+        final var playList = playlistRepository.findById(id);
+
+        if(playList.isEmpty()) {
+            return Optional.empty();
+        }
+
+        final List<SongEntity> songs = playList.get().getPlaylistSongs().stream().map(e -> e.getSong()).toList();
+
+        final var aboveBpm = songs.stream().map(SongEntity::getBpm).min(Integer::min).orElse(0);
+        final var belowBpm = songs.stream().map(SongEntity::getBpm).min(Integer::max).orElse(1);
+        final List<String> genres = songs.stream().map(SongEntity::getGenre).toList();
+        final String randomGenre = genres.get(new Random().nextInt(genres.size()));
+
+        return Optional.of(new Mood(randomGenre, belowBpm, aboveBpm));
     }
 }
