@@ -2,7 +2,7 @@ SET SCHEMA 'rockstars';
 
 CREATE TABLE artist (
 	id BIGINT PRIMARY KEY,
-	name varchar NOT NULL
+	name varchar NOT NULL UNIQUE
 );
 
 CREATE TABLE song (

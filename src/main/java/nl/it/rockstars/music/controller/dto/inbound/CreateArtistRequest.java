@@ -7,7 +7,7 @@ import lombok.Value;
 public class CreateArtistRequest{
 
     @JsonProperty("Id")
-    Integer id;
+    Long id;
 
     @JsonProperty("Name")
     String name;

@@ -21,7 +21,6 @@ import java.util.List;
 @Entity
 @Table(name = "artist", schema = "rockstars")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -42,12 +41,12 @@ public class ArtistEntity {
     @EqualsAndHashCode.Exclude
     private List<SongEntity> songs = new ArrayList<>();
 
-    public void addPet(SongEntity song) {
+    public void addSong(SongEntity song) {
         songs.add(song);
         song.setArtist(this);
     }
 
-    public void removePet(SongEntity song) {
+    public void removeSong(SongEntity song) {
         songs.remove(song);
         song.setArtist(null);
     }
