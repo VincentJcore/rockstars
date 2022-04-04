@@ -15,7 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "playlist", schema = "rockstars")
@@ -32,10 +34,10 @@ public class PlaylistEntity {
     private String creator;
     private String title;
 
-    @OneToMany(mappedBy = "playlist", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<PlaylistSongEntity> playlistSongs = new ArrayList<>();
+    private Set<PlaylistSongEntity> playlistSongs = new HashSet<>();
 
     public void addPlaylistSong(PlaylistSongEntity playlistSong) {
         playlistSongs.add(playlistSong);

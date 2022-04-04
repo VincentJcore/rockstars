@@ -107,7 +107,7 @@ public class SongService {
     @Transactional
     public List<Song> findByMood(String genre, int belowBpm, int aboveBpm) {
 
-        return songRepository.findAllByGenreAndBpmGreaterThanAndBpmLessThan(genre, belowBpm, aboveBpm)
+        return songRepository.findAllByGenreAndBpmGreaterThanAndBpmLessThan(genre, aboveBpm, belowBpm)
                              .stream()
                              .map(entityTransformer::modelFromEntity)
                              .toList();
