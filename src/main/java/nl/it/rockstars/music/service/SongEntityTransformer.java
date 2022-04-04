@@ -30,20 +30,59 @@ public class SongEntityTransformer {
     }
 
     @Transactional
-    public Song modelFromCreateRequest(SongEntity model) {
+    public Song modelFromEntity(SongEntity entity) {
 
         return Song.builder()
-                   .id(model.getId())
-                   .artist(model.getArtist().getName())
-                   .year(model.getYear())
-                   .spotifyId(model.getSpotifyId())
-                   .album(model.getAlbum())
-                   .duration(model.getDuration())
-                   .shortname(model.getShortname())
-                   .genre(model.getGenre())
-                   .bpm(model.getBpm())
-                   .name(model.getName())
+                   .id(entity.getId())
+                   .artist(entity.getArtist().getName())
+                   .year(entity.getYear())
+                   .spotifyId(entity.getSpotifyId())
+                   .album(entity.getAlbum())
+                   .duration(entity.getDuration())
+                   .shortname(entity.getShortname())
+                   .genre(entity.getGenre())
+                   .bpm(entity.getBpm())
+                   .name(entity.getName())
                    .build();
+    }
+
+    @Transactional
+    public SongEntity updateEntityFromModel(SongEntity entity, Song model) {
+
+        if (model.getYear() != 0) {
+            entity.setYear(model.getYear());
+        }
+
+        if (model.getSpotifyId() != null) {
+            entity.setSpotifyId(model.getSpotifyId());
+        }
+
+        if (model.getAlbum() != null) {
+            entity.setAlbum(model.getAlbum());
+        }
+
+        if (model.getDuration() != 0) {
+            entity.setDuration(model.getDuration());
+        }
+
+        if (model.getShortname() != null) {
+            entity.setShortname(model.getShortname());
+        }
+
+        if (model.getGenre() != null) {
+            entity.setGenre(model.getGenre());
+        }
+
+        if (model.getBpm() != 0) {
+            entity.setBpm(model.getBpm());
+        }
+
+        if (model.getName() != null) {
+            entity.setName(model.getName());
+        }
+
+        return entity;
+
     }
 
 }

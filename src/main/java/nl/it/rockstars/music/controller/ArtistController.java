@@ -42,7 +42,7 @@ public class ArtistController {
     }
 
     @PostMapping
-    ResponseEntity<ArtistResponse> findArtistById(@RequestBody CreateArtistRequest createArtistRequest) {
+    ResponseEntity<ArtistResponse> createArtist(@RequestBody CreateArtistRequest createArtistRequest) {
 
         final var unsavedArtist = transformer.modelFromCreateRequest(createArtistRequest);
 

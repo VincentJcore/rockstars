@@ -19,8 +19,8 @@ public class ArtistEntityTransformer {
     public Artist modelFromEntity(ArtistEntity entity) {
 
         return Artist.builder()
-                .id(entity.getId())
-                .name(entity.getName())
+                     .id(entity.getId())
+                     .name(entity.getName())
                      .build();
     }
 }

@@ -1,10 +1,5 @@
 package nl.it.rockstars.music.service.model;
 
-import lombok.Builder;
-import lombok.Value;
-
-@Value
-@Builder
 public class SongUpdate {
 
     int year;

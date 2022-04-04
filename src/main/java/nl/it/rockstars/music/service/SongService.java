@@ -55,6 +55,43 @@ public class SongService {
             unsavedSongs.add(entity);
         }
 
-        return songRepository.saveAll(unsavedSongs).stream().map(entityTransformer::modelFromCreateRequest).toList();
+        return songRepository.saveAll(unsavedSongs).stream().map(entityTransformer::modelFromEntity).toList();
+    }
+
+    @Transactional
+    public Optional<Song> findById(Long id) {
+
+        return songRepository.findById(id)
+                             .map(entityTransformer::modelFromEntity);
+    }
+
+    @Transactional
+    public Optional<Song> save(Song unsavedSong) {
+
+        final var maybeArtist = artistRepository.findByName(unsavedSong.getArtist());
+
+        if(maybeArtist.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(unsavedSong)
+                .filter(e -> !songRepository.existsById(unsavedSong.getId()))
+                .map(e -> entityTransformer.entityFromModel(unsavedSong, maybeArtist.get()))
+                .map(songRepository::save)
+                .map(entityTransformer::modelFromEntity);
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        songRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Optional<Song> updateSong(Song updatedModel) {
+
+        return songRepository.findById(updatedModel.getId())
+                             .map(e -> entityTransformer.updateEntityFromModel(e, updatedModel))
+                             .map(songRepository::save)
+                             .map(entityTransformer::modelFromEntity);
     }
 }
