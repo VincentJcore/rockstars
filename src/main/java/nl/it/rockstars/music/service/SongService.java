@@ -94,4 +94,22 @@ public class SongService {
                              .map(songRepository::save)
                              .map(entityTransformer::modelFromEntity);
     }
+
+    @Transactional
+    public List<Song> findByAlbum(String albumName) {
+
+        return songRepository.findAllByAlbum(albumName)
+                             .stream()
+                             .map(entityTransformer::modelFromEntity)
+                             .toList();
+    }
+
+    @Transactional
+    public List<Song> findByMood(String genre, int belowBpm, int aboveBpm) {
+
+        return songRepository.findAllByGenreAndBpmGreaterThanAndBpmLessThan(genre, belowBpm, aboveBpm)
+                             .stream()
+                             .map(entityTransformer::modelFromEntity)
+                             .toList();
+    }
 }

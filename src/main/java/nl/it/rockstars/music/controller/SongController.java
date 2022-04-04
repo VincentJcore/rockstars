@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nl.it.rockstars.music.controller.dto.SongTransformer;
 import nl.it.rockstars.music.controller.dto.inbound.CreateSongRequest;
+import nl.it.rockstars.music.controller.dto.inbound.FindAlbumRequest;
+import nl.it.rockstars.music.controller.dto.inbound.FindByMoodRequest;
 import nl.it.rockstars.music.controller.dto.inbound.UpdateArtistRequest;
 import nl.it.rockstars.music.controller.dto.inbound.UpdateSongRequest;
 import nl.it.rockstars.music.controller.dto.outbound.SongResponse;
@@ -19,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -86,5 +90,29 @@ public class SongController {
 
         service.deleteById(id);
     }
+
+    @PostMapping("/byAlbum")
+    ResponseEntity<List<SongResponse>> findSongsByAlbum(@RequestBody @Valid FindAlbumRequest request) {
+
+        final List<SongResponse> album = service.findByAlbum(request.getAlbumName())
+                                                .stream()
+                                                .map(transformer::responseFromModel)
+                                                .toList();
+
+        return ResponseEntity.ok(album);
+    }
+
+    @PostMapping("/byMood")
+    ResponseEntity<List<SongResponse>> findSongsByAlbum(@RequestBody @Valid FindByMoodRequest request) {
+
+        final List<SongResponse> album = service.findByMood(request.getGenre(), request.getBelowBpm(),
+                                                            request.getAboveBpm())
+                                                .stream()
+                                                .map(transformer::responseFromModel)
+                                                .toList();
+
+        return ResponseEntity.ok(album);
+    }
+
 
 }
