@@ -9,5 +9,5 @@ public interface ArtistRepository extends JpaRepository<ArtistEntity, Long> {
 
     Optional<ArtistEntity> findByName(String name);
 
-    boolean existsArtistEntitiesByName(String name);
+    boolean existsArtistEntitiesByNameOrId(String name, Long id);
 }
