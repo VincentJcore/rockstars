@@ -1,4 +1,4 @@
-package nl.it.rockstars.music.controller.dto;
+package nl.it.rockstars.music.controller.transformer;
 
 import nl.it.rockstars.music.controller.dto.inbound.CreateArtistRequest;
 import nl.it.rockstars.music.controller.dto.outbound.ArtistResponse;

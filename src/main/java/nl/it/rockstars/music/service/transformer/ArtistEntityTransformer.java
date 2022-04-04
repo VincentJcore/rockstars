@@ -1,4 +1,4 @@
-package nl.it.rockstars.music.service;
+package nl.it.rockstars.music.service.transformer;
 
 import nl.it.rockstars.music.repository.entity.ArtistEntity;
 import nl.it.rockstars.music.service.model.Artist;

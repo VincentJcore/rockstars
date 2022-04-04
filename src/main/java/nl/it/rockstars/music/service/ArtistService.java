@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import nl.it.rockstars.music.repository.ArtistRepository;
 import nl.it.rockstars.music.repository.entity.ArtistEntity;
 import nl.it.rockstars.music.service.model.Artist;
+import nl.it.rockstars.music.service.transformer.ArtistEntityTransformer;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

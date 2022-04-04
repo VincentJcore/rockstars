@@ -1,4 +1,4 @@
-package nl.it.rockstars.music.service;
+package nl.it.rockstars.music.service.transformer;
 
 import nl.it.rockstars.music.repository.entity.ArtistEntity;
 import nl.it.rockstars.music.repository.entity.SongEntity;
@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 public class SongEntityTransformer {
 
     @Transactional
-    SongEntity entityFromModel(Song model, ArtistEntity artistEntity) {
+    public SongEntity entityFromModel(Song model, ArtistEntity artistEntity) {
 
         final var entity = new SongEntity();
         entity.setId(model.getId());

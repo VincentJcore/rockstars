@@ -2,11 +2,10 @@ package nl.it.rockstars.music.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nl.it.rockstars.music.controller.dto.SongTransformer;
+import nl.it.rockstars.music.controller.transformer.SongTransformer;
 import nl.it.rockstars.music.controller.dto.inbound.CreateSongRequest;
 import nl.it.rockstars.music.controller.dto.inbound.FindAlbumRequest;
 import nl.it.rockstars.music.controller.dto.inbound.FindByMoodRequest;
-import nl.it.rockstars.music.controller.dto.inbound.UpdateArtistRequest;
 import nl.it.rockstars.music.controller.dto.inbound.UpdateSongRequest;
 import nl.it.rockstars.music.controller.dto.outbound.SongResponse;
 import nl.it.rockstars.music.service.SongService;
@@ -46,7 +45,7 @@ public class SongController {
     }
 
     @PostMapping
-    ResponseEntity<SongResponse> createSong(@RequestBody CreateSongRequest createSongRequest) {
+    ResponseEntity<SongResponse> createSong(@RequestBody @Valid CreateSongRequest createSongRequest) {
 
         final var unsavedSong = transformer.modelFromCreateRequest(createSongRequest);
 

@@ -1,4 +1,4 @@
-package nl.it.rockstars.music.controller.dto.outbound;
+package nl.it.rockstars.music.controller.dto.inbound;
 
 import lombok.Value;
 

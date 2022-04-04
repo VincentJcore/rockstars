@@ -6,6 +6,7 @@ import nl.it.rockstars.music.repository.SongRepository;
 import nl.it.rockstars.music.repository.entity.ArtistEntity;
 import nl.it.rockstars.music.repository.entity.SongEntity;
 import nl.it.rockstars.music.service.model.Song;
+import nl.it.rockstars.music.service.transformer.SongEntityTransformer;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -98,7 +99,7 @@ public class SongService {
     @Transactional
     public List<Song> findByAlbum(String albumName) {
 
-        return songRepository.findAllByAlbum(albumName)
+        return songRepository.findSongEntitiesByAlbum(albumName)
                              .stream()
                              .map(entityTransformer::modelFromEntity)
                              .toList();

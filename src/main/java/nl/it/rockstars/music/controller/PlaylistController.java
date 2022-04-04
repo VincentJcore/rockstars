@@ -2,8 +2,8 @@ package nl.it.rockstars.music.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nl.it.rockstars.music.controller.dto.SongTransformer;
-import nl.it.rockstars.music.controller.dto.outbound.CreatePlaylistRequest;
+import nl.it.rockstars.music.controller.transformer.SongTransformer;
+import nl.it.rockstars.music.controller.dto.inbound.CreatePlaylistRequest;
 import nl.it.rockstars.music.controller.dto.outbound.SongResponse;
 import nl.it.rockstars.music.service.PlaylistService;
 import nl.it.rockstars.music.service.SongService;

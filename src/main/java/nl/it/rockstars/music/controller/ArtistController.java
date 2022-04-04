@@ -2,7 +2,7 @@ package nl.it.rockstars.music.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nl.it.rockstars.music.controller.dto.ArtistTransformer;
+import nl.it.rockstars.music.controller.transformer.ArtistTransformer;
 import nl.it.rockstars.music.controller.dto.inbound.CreateArtistRequest;
 import nl.it.rockstars.music.controller.dto.inbound.UpdateArtistRequest;
 import nl.it.rockstars.music.controller.dto.outbound.ArtistResponse;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -42,7 +43,7 @@ public class ArtistController {
     }
 
     @PostMapping
-    ResponseEntity<ArtistResponse> createArtist(@RequestBody CreateArtistRequest createArtistRequest) {
+    ResponseEntity<ArtistResponse> createArtist(@RequestBody @Valid @NotNull CreateArtistRequest createArtistRequest) {
 
         final var unsavedArtist = transformer.modelFromCreateRequest(createArtistRequest);
 
@@ -58,7 +59,8 @@ public class ArtistController {
     }
 
     @PatchMapping("/{id}")
-    ResponseEntity<ArtistResponse> updateArtistById(@PathVariable(name = "id") @NotNull @Min(1) Long id, @RequestBody UpdateArtistRequest updateArtistRequest) {
+    ResponseEntity<ArtistResponse> updateArtistById(@PathVariable(name = "id") @NotNull @Min(1) Long id,
+            @RequestBody @NotNull UpdateArtistRequest updateArtistRequest) {
 
         final Optional<Artist> maybeArtist = service.findById(id);
 
