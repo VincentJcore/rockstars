@@ -8,7 +8,6 @@ import nl.it.rockstars.music.controller.dto.outbound.SongResponse;
 import nl.it.rockstars.music.service.PlaylistService;
 import nl.it.rockstars.music.service.SongService;
 import nl.it.rockstars.music.service.model.Mood;
-import nl.it.rockstars.music.service.model.Song;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,10 +33,9 @@ public class PlaylistController {
     private final SongTransformer songTransformer;
 
     @PostMapping
-    ResponseEntity<Long> createPlaylist(Principal principal,
-            @RequestBody @Valid @NotNull CreatePlaylistRequest playlistRequest) {
+    ResponseEntity<Long> createPlaylist(@RequestBody @Valid @NotNull CreatePlaylistRequest playlistRequest) {
 
-        return ResponseEntity.ok(service.createPlaylist(principal.getName(),
+        return ResponseEntity.ok(service.createPlaylist("owner",
                                                         playlistRequest.getTitle(),
                                                         playlistRequest.getSonglist()));
     }

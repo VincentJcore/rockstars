@@ -20,11 +20,11 @@ public class ApplicationHealthController {
 	private final ApplicationHealthService applicationHealthService;
 
 	@GetMapping
-	public ApplicationHealthDTO applicationHealthInfo(Principal principal) {
+	public ApplicationHealthDTO applicationHealthInfo() {
 
 		final var currentHealth = applicationHealthService.getCurrentHealth();
 
-		log.info("Application health requested: {}, by: {}", currentHealth, principal.getName());
+		log.info("Application health requested: {}", currentHealth);
 
 		return new ApplicationHealthDTO(currentHealth);
 	}
